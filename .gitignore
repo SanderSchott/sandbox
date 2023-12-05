@@ -1,6 +1,18 @@
 # Prerequisites
 *.d
 
+# Build & Cache files
+/build*
+
+# Ignore everything in include, source, and test except starting files
+/include/sandbox/*.hpp
+/source/sandbox/*.cpp
+/test/source/*.cpp
+
+!/include/sandbox/example.hpp
+!/source/sandbox/main.cpp
+!/test/source/main.cpp
+
 # Compiled Object files
 *.slo
 *.lo
@@ -30,3 +42,6 @@
 *.exe
 *.out
 *.app
+
+# MacOS filesystem file
+.DS_Store
