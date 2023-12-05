@@ -14,10 +14,10 @@ env:
   CTEST_OUTPUT_ON_FAILURE: 1
   CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
   BUILD_TYPE: Debug
-  EXECUTABLE: CSMUnits_test
+  EXECUTABLE: Sandbox_test
   CC: gcc-12
   CXX: g++-12
-  CSMUNIT_TEST: True
+  SANDBOX_TEST: True
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCSMUNITS_TEST=${{env.CSMUNIT_TEST}}
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DSANDBOX_TEST=${{env.SANDBOX_TEST}}
 
       - name: build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -t ${{env.EXECUTABLE}}
