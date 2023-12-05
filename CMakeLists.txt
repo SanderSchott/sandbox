@@ -32,7 +32,21 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23)
 
 # Compiler Properties for executable
 
-target_compile_options(${PROJECT_NAME} PUBLIC -g -Wall -Wpedantic -Werror)
+if(MSVC)
+  target_compile_options(
+    ${PROJECT_NAME} PUBLIC /permissive- /O2 /bigobj /W4 /WX
+  )
+else()
+  target_compile_options(
+    ${PROJECT_NAME} PUBLIC -O3 -Wall -Wextra -Wpedantic -Werror -std=c++2b
+  )
+endif()
+
+if(MINGW)
+  target_link_options(
+    ${PROJECT_NAME} PUBLIC -static-libgcc -static-libstdc++ -static
+  )
+endif()
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
 
@@ -68,8 +82,13 @@ set_property(
 
 # Compiler Properties for testing
 target_compile_features(${PROJECT_NAME}_test PRIVATE cxx_std_23)
-
-target_compile_options(${PROJECT_NAME}_test PRIVATE -g -Wall -Wpedantic -Werror)
+if(MSVC)
+  target_compile_options(${PROJECT_NAME}_test PRIVATE /bigobj /W4 /WX)
+else()
+  target_compile_options(
+    ${PROJECT_NAME}_test PRIVATE -g -Wall -Wextra -Wpedantic -Werror -std=c++2b
+  )
+endif()
 
 enable_testing()
 include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
