@@ -19,10 +19,10 @@ CPMAddPackage("gh:sddale/csm-units#main")
 
 # Source and header globs
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS
-     "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp"
+     "${CMAKE_CURRENT_SOURCE_DIR}/source/sandbox/*.cpp"
 )
 file(GLOB_RECURSE headers CONFIGURE_DEPENDS
-     "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
+     "${CMAKE_CURRENT_SOURCE_DIR}/include/sandbox/*.hpp"
 )
 
 # ---- Create Executable ----
@@ -32,9 +32,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 23)
 
 # Compiler Properties for executable
 
-target_compile_options(
-  ${PROJECT_NAME} PUBLIC -g -Wall -Wextra -Wpedantic -Werror
-)
+target_compile_options(${PROJECT_NAME} PUBLIC -g -Wall -Wpedantic -Werror)
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
 
@@ -71,9 +69,7 @@ set_property(
 # Compiler Properties for testing
 target_compile_features(${PROJECT_NAME}_test PRIVATE cxx_std_23)
 
-target_compile_options(
-  ${PROJECT_NAME}_test PRIVATE -g -Wall -Wextra -Wpedantic -Werror
-)
+target_compile_options(${PROJECT_NAME}_test PRIVATE -g -Wall -Wpedantic -Werror)
 
 enable_testing()
 include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
