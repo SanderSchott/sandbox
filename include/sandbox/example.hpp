@@ -1,3 +1,3 @@
 #pragma once
 
-namespace practice {} // namespace practice
+namespace practice {}  // namespace practice
