@@ -3,6 +3,7 @@
 
 # Build & Cache files
 /build*
+/.cache*
 
 # Ignore everything in include, source, and test except starting files
 /include/sandbox/*.hpp
