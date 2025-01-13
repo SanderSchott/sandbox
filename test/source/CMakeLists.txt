@@ -22,7 +22,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   target_compile_options(${PROJECT_NAME}_test PRIVATE /bigobj /W4 /WX)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   target_compile_options(
-    ${PROJECT_NAME}_frontend_test
+    ${PROJECT_NAME}_test
     PRIVATE -g
             -Wall
             -Wextra
