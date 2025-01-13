@@ -4,5 +4,5 @@ add_library(main_include INTERFACE example.hpp)
 
 target_link_libraries(
   main_include INTERFACE CSMUnits::CSMUnits gcem
-                         # subdirectory_name
+                         # subdirectory_library_name
 )
