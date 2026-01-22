@@ -31,12 +31,16 @@ jobs:
           path: "**/cpm_modules"
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
+      - name: Setup CMake 4.0
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: "4.0.0"
+
       - name: configure
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DSANDBOX_TEST=${{env.SANDBOX_TEST}}
 
       - name: build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} -t ${{env.EXECUTABLE}}
-
 
       - name: test
         working-directory: ${{github.workspace}}/build
