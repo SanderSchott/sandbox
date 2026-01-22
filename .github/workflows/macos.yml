@@ -15,8 +15,8 @@ env:
   CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
   BUILD_TYPE: Debug
   EXECUTABLE: Sandbox_test
-  CC: $(brew --prefix llvm@15)/bin/clang
-  CXX: $(brew --prefix llvm@15)/bin/clang++
+  CC: clang
+  CXX: clang++
   SANDBOX_TEST: True
 
 jobs:
