@@ -11,19 +11,25 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   )
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   target_compile_options(
-    ${PROJECT_NAME}
-    PUBLIC -O3
-           -Wall
-           -Wextra
-           -Wpedantic
-           -Werror
-           -Wno-psabi # disable abi change warnings
-           -std=c++23
+    ${PROJECT_NAME} PUBLIC -Wall -Wextra -Wpedantic -Werror -std=c++23
+                           -Wno-psabi # disable abi change warnings
   )
+
+  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_options(${PROJECT_NAME} PUBLIC -g -O0)
+  else()
+    target_compile_options(${PROJECT_NAME} PUBLIC -O3)
+  endif()
 else()
   target_compile_options(
-    ${PROJECT_NAME} PUBLIC -O3 -Wall -Wextra -Wpedantic -Werror -std=c++23
+    ${PROJECT_NAME} PUBLIC -Wall -Wextra -Wpedantic -Werror -std=c++23
   )
+
+  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_options(${PROJECT_NAME} PUBLIC -g -O0)
+  else()
+    target_compile_options(${PROJECT_NAME} PUBLIC -O3)
+  endif()
 endif()
 
 if(MINGW)
