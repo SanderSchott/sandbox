@@ -29,6 +29,14 @@ jobs:
           path: "**/cpm_modules"
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
+      - name: Install CMake 4.0
+        run: |
+          wget https://github.com/Kitware/CMake/releases/download/v4.0.0/cmake-4.0.0-linux-x86_64.sh
+          sudo mkdir -p /opt/cmake
+          sudo sh cmake-4.0.0-linux-x86_64.sh --skip-license --prefix=/opt/cmake
+          sudo ln -sf /opt/cmake/bin/cmake /usr/local/bin/cmake
+          cmake --version
+
       - name: build and install library
         run: |
           cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DSANDBOX_TEST=${{env.CSMUNIT_TEST}}
@@ -40,7 +48,6 @@ jobs:
 
       - name: build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-
 
       - name: test
         working-directory: ${{github.workspace}}/build
